@@ -10,4 +10,10 @@ export default defineConfig({
     tailwindcss(),
     babel({ presets: [reactCompilerPreset()] })
   ],
+  server: {
+    proxy: {
+      '/api': 'http://localhost:8888',
+      '/uploads': 'http://localhost:8888'
+    }
+  }
 })
