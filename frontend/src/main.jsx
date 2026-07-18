@@ -2,9 +2,10 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
-import { store } from './redux/store.js'
+import Home from './pages/Home.jsx'
+import store from './redux/store.js'
 import { Provider } from 'react-redux'
-import { Route, RouterProvider, createRouteFromElements } from 'react-router'
+import { Route, RouterProvider, createRoutesFromElements } from 'react-router'
 import { createBrowserRouter } from 'react-router-dom'
 
 
@@ -18,9 +19,9 @@ import { createBrowserRouter } from 'react-router-dom'
 
 // Routes
 const router = createBrowserRouter(
-  createRouteFromElements(
+  createRoutesFromElements(
     <Route path='/' element={<App />}>
-
+      <Route index={true} path='/' element={<Home />} />
     </Route>
   )
 )
