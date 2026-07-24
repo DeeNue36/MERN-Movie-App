@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+@layer base {
+    body {
+        @apply bg-[#0f0f10] text-white;
+    }
+
+    /* input, textarea, select, option {
+        @apply text-black;
+    } */
+}
