@@ -1,9 +1,5 @@
-
-
 export const Loader = () => {
     return (
-        <div>
-        
-        </div>
+        <div className='animate-spin rounded-full h-16 w-16 border-t-4 border-teal-500/50'></div>
     )
 }
