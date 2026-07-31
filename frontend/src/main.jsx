@@ -3,8 +3,13 @@ import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
 import Home from './pages/Home.jsx'
+import { Profile } from './pages/User/Profile.jsx'
+
+// Auth/Restricted Pages
 import { Login } from './pages/Auth/Login.jsx'
 import { Register } from './pages/Auth/Register.jsx'
+import { PrivateRoute } from './pages/Auth/PrivateRoute.jsx'
+
 import store from './redux/store.js'
 import { Provider } from 'react-redux'
 import { Route, RouterProvider, createRoutesFromElements } from 'react-router'
@@ -26,6 +31,10 @@ const router = createBrowserRouter(
       <Route index={true} path='/' element={<Home />} />
       <Route path='/login' element={<Login />} />
       <Route path='/register' element={<Register />} />
+
+      <Route path='' element={<PrivateRoute/>}>
+        <Route path='/profile' element={<Profile />} />
+      </Route>
     </Route>
   )
 )
