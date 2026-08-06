@@ -65,3 +65,17 @@ export const getAllGenres = asyncHandler( async(req, res) => {
         return res.status(400).json(error.message);
     }
 });
+
+export const readGenre = asyncHandler( async(req, res) => {
+    try {
+        const { id } = req.params;
+        const genre = await Genre.findOne({_id: id}); // const genre = await Genre.findById(id);
+        if (!genre) {
+            return res.status(404).json({error: "Genre not found"});
+        }
+        res.json(genre);
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json(error.message);
+    }
+});
