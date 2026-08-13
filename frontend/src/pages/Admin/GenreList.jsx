@@ -20,6 +20,8 @@ export const GenreList = () => {
     const [updateGenre] = useUpdateGenreMutation();
     const [deleteGenre] = useDeleteGenreMutation();
 
+
+    //* Create A Genre Function
     const handleCreateGenre = async (e) => {
         e.preventDefault();
 
@@ -30,13 +32,12 @@ export const GenreList = () => {
 
         try {
             const newGenre = await createGenre({name: genreName}).unwrap();
-            // const newGenre = await createGenre({name}).unwrap();
             if (newGenre.error) {
                 toast.error(newGenre.error);
             }
             else {
                 setGenreName("");
-                toast.success(`${newGenre.name} genre created successfully`);
+                toast.success(`${newGenre.name} Genre created successfully`);
                 refetch();
             }
 
@@ -45,6 +46,62 @@ export const GenreList = () => {
             toast.error('Genre creation failed, please try again');
         }
     }
+
+    //* Update A Genre Function
+    const handleUpdateGenre = async (e) => {
+        e.preventDefault();
+
+        if(!updateGenre) {
+            toast.error('Genre name is required');
+            return;
+        }
+
+        try {
+            const result = await updateGenre({
+                id: selectedGenre._id,
+                // name: updatedGenre, 
+                updateGenre: {
+                    name: updatedGenre,
+                }
+            }).unwrap();
+
+            if (result.error) {
+                toast.error(result.error);
+            }
+            else {
+                toast.success(`${result.name} Genre updated successfully`);
+                refetch();
+                setUpdatedGenre("");
+                setModalVisible(false);
+                setSelectedGenre(null);
+            }
+            
+        } catch (error) {
+            console.error(error);
+            toast.error('Genre update failed, please try again');
+        }
+    }
+
+
+    // * Delete A Genre Function
+    const handleDeleteGenre = async () => {
+        try {
+            const result = await deleteGenre(selectedGenre._id).unwrap();
+            if (result.error) {
+                toast.error(result.error);
+            }
+            else {
+                toast.success(`${result.name} Genre deleted successfully`);
+                refetch();
+                setModalVisible(false);
+                setSelectedGenre(null);
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error('Genre deletion failed, please try again');
+        }
+    }
+
 
     return (
         <div className="ml-40 flex flex-col md:flex-row">
@@ -79,9 +136,9 @@ export const GenreList = () => {
                         value={updatedGenre} 
                         buttonText="Update"
                         setValue={(value) => setUpdatedGenre(value)} 
-                        // handleSubmit={handleUpdateGenre}
+                        handleSubmit={handleUpdateGenre}
                         selectedGenre={selectedGenre}
-                        // handleDelete={handleDeleteGenre}
+                        handleDelete={handleDeleteGenre}
                     />
                 </Modal>
 
