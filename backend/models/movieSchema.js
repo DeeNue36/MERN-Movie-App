@@ -1,6 +1,20 @@
 import mongoose from "mongoose";
 const { ObjectId } = mongoose.Schema;
 
+const reviewSchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    rating: { type: Number, required: true },
+    comment: { type: String, required: true },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User',
+    },
+    // createdAt: { type: Date, default: Date.now },
+}, 
+    {timestamps: true}
+);
+
 const movieSchema = new mongoose.Schema({
     name: { type: String, required: true },
     image: { type: String, required: true },
@@ -15,4 +29,6 @@ const movieSchema = new mongoose.Schema({
     {timestamps: true}
 );
 
-export default mongoose.model('Movie', movieSchema);
+const Movie = mongoose.model('Movie', movieSchema);
+export default Movie
+// OR export default mongoose.model('Movie', movieSchema);
