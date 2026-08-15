@@ -23,7 +23,7 @@ const movieSchema = new mongoose.Schema({
     description: { type: String, required: true },
     cast: [{ type: String }],
     reviews: [reviewSchema],
-    totalReviews:{type: Number, required: true, default: 0},
+    numReviews:{type: Number, required: true, default: 0},
     createdAt: { type: Date, default: Date.now },
 }, 
     {timestamps: true}
