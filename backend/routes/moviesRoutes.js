@@ -7,8 +7,8 @@ import { createMovie,
     updateMovie, 
     // deleteMovie, 
     getAllMovies, 
-    getSpecificMovie
-    // readMovie 
+    getSpecificMovie,
+    createMovieReview
 } from "../controllers/movieController.js";
 
 // Middlewares
@@ -19,7 +19,8 @@ import checkID from "../middlewares/checkID.js";
 router.get('/all-movies', getAllMovies);
 router.get('/movie/:id', getSpecificMovie);
 
-// Private Routes
+// Private/Restricted Routes
+router.post('/:id/reviews', authenticate, checkID, createMovieReview);
 
 // Admin Routes
 router.post('/create-movie', authenticate, authorizeAdmin, createMovie);
