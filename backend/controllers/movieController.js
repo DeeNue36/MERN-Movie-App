@@ -56,6 +56,7 @@ export const updateMovie = async (req, res) => {
 export const createMovieReview = async (req, res) => {
     try{
         const {rating, comment} = req.body;
+
         const movie = await Movie.findById(req.params.id);
         if(movie) {
             const alreadyReviewed = movie.reviews.find((r) => r.user.toString() === req.user._id.toString());
@@ -89,4 +90,20 @@ export const createMovieReview = async (req, res) => {
     }
 }
 
-// export { createMovie, getAllMovies, getSpecificMovie, updateMovie, createMovieReview };
+export const deleteMovie = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const deleteMovie = await Movie.findByIdAndDelete(id);
+        if (!deleteMovie) {
+            return res.status(404).json({error: "Movie not found"});
+        }
+
+        res.json({message: "Movie deleted successfully"}, deleteMovie);
+
+    } catch (error) {
+        res.status(500).json({error: error.message});
+    }
+}
+
+// export { createMovie, getAllMovies, getSpecificMovie, updateMovie, createMovieReview, deleteMovie };
