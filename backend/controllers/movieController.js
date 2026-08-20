@@ -133,4 +133,15 @@ export const deleteComment = async (req, res) => {
     }
 }
 
-// export { createMovie, getAllMovies, getSpecificMovie, updateMovie, createMovieReview, deleteMovie, deleteComment };
+export const getNewMovies = async (req, res) => {
+    try {
+        const newMovies = await Movie.find().sort({createdAt: -1}).limit(10);
+        res.json(newMovies);
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({error: error.message});
+    }
+}
+
+// export { createMovie, getAllMovies, getSpecificMovie, updateMovie, createMovieReview, deleteMovie, deleteComment, getNewMovies };
