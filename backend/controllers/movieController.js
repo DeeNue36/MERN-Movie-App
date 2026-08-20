@@ -144,4 +144,14 @@ export const getNewMovies = async (req, res) => {
     }
 }
 
+export const getTopMovies = async (req, res) => {
+    try {
+        const topMovies = await Movie.find().sort({numReviews: -1}).limit(10);
+        res.json(topMovies);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({error: error.message});
+    }
+}
+
 // export { createMovie, getAllMovies, getSpecificMovie, updateMovie, createMovieReview, deleteMovie, deleteComment, getNewMovies };
