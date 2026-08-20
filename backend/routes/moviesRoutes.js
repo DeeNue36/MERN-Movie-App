@@ -5,10 +5,11 @@ const router = express.Router();
 // Controllers
 import { createMovie, 
     updateMovie, 
-    // deleteMovie, 
+    deleteMovie, 
     getAllMovies, 
     getSpecificMovie,
-    createMovieReview
+    createMovieReview,
+    deleteComment
 } from "../controllers/movieController.js";
 
 // Middlewares
@@ -25,5 +26,8 @@ router.post('/:id/reviews', authenticate, checkID, createMovieReview);
 // Admin Routes
 router.post('/create-movie', authenticate, authorizeAdmin, createMovie);
 router.put('/update-movie/:id', authenticate, authorizeAdmin, updateMovie);
+router.delete('/delete-movie/:id', authenticate, authorizeAdmin, deleteMovie);
+router.delete('/delete-comment', authenticate, authorizeAdmin, deleteComment);
+
 
 export default router;
