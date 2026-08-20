@@ -128,8 +128,9 @@ export const deleteComment = async (req, res) => {
         res.json({message: "Review deleted successfully"});
     }
     catch (error) {
+        console.error(error);
         res.status(500).json({error: error.message});
     }
 }
 
-// export { createMovie, getAllMovies, getSpecificMovie, updateMovie, createMovieReview, deleteMovie };
+// export { createMovie, getAllMovies, getSpecificMovie, updateMovie, createMovieReview, deleteMovie, deleteComment };
