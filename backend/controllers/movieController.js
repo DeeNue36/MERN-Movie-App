@@ -106,4 +106,30 @@ export const deleteMovie = async (req, res) => {
     }
 }
 
+export const deleteComment = async (req, res) => {
+    try {
+        const { movieId, reviewId } = req.params;
+
+        const movie = await Movie.findById(movieId);
+        if (!movie) {
+            return res.status(404).json({error: "Movie not found"});
+        }
+
+        const review = movie.reviews.findIndex((r) => r._id.toString() === reviewId); // Find the index of the review to be deleted and check if its id matches the reviewId
+        if (review === -1) {
+            return res.status(404).json({error: "Review not found"});
+        }
+
+        movie.reviews.splice(review, 1);
+        movie.numReviews = movie.reviews.length;
+        movie.rating = movie.reviews.length > 0 ? movie.reviews.reduce((acc, item) => item.rating + acc, 0) / movie.reviews.length : 0;
+
+        await movie.save();
+        res.json({message: "Review deleted successfully"});
+    }
+    catch (error) {
+        res.status(500).json({error: error.message});
+    }
+}
+
 // export { createMovie, getAllMovies, getSpecificMovie, updateMovie, createMovieReview, deleteMovie };
