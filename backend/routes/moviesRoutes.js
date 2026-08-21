@@ -11,7 +11,8 @@ import { createMovie,
     createMovieReview,
     deleteComment,
     getNewMovies,
-    getTopMovies
+    getTopMovies,
+    getRandomMovies
 } from "../controllers/movieController.js";
 
 // Middlewares
@@ -23,6 +24,7 @@ router.get('/all-movies', getAllMovies);
 router.get('/movie/:id', getSpecificMovie);
 router.get('/new-movies', getNewMovies);
 router.get('/top-movies', getTopMovies);
+router.get('/random-movies', getRandomMovies)
 
 // Private/Restricted Routes
 router.post('/:id/reviews', authenticate, checkID, createMovieReview);
