@@ -154,4 +154,14 @@ export const getTopMovies = async (req, res) => {
     }
 }
 
+export const getRandomMovies = async (req, res) => {
+    try {
+        const randomMovies = await Movie.aggregate([{ $sample: { size: 10 } }]);
+        res.json(randomMovies);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({error: error.message});
+    }
+}
+
 // export { createMovie, getAllMovies, getSpecificMovie, updateMovie, createMovieReview, deleteMovie, deleteComment, getNewMovies };
