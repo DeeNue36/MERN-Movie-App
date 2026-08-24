@@ -164,4 +164,4 @@ export const getRandomMovies = async (req, res) => {
     }
 }
 
-// export { createMovie, getAllMovies, getSpecificMovie, updateMovie, createMovieReview, deleteMovie, deleteComment, getNewMovies };
+// export { createMovie, getAllMovies, getSpecificMovie, updateMovie, createMovieReview, deleteMovie, deleteComment, getNewMovies, getTopMovies, getRandomMovies };
