@@ -52,5 +52,39 @@ export const moviesApiSlice = apiSlice.injectEndpoints({
                 method: "GET"
             })
         }),
+
+        uploadImage: builder.mutation({
+            query: (formData) => ({
+                url: `${UPLOAD_URL}`,
+                method: "POST",
+                body: formData
+            })
+        }),
+
+        getNewMovies: builder.query({
+            query: () => `${MOVIES_URL}/new-movies`
+        }),
+
+        getTopMovies: builder.query({
+            query: () => `${MOVIES_URL}/top-movies`
+        }),
+
+        getRandomMovies: builder.query({
+            query: () => `${MOVIES_URL}/random-movies`
+        })
     })
-})
+});
+
+export const {
+    useGetAllMoviesQuery,
+    useCreateMovieMutation,
+    useUpdateMovieMutation,
+    useAddMovieReviewMutation,
+    useDeleteMovieReviewMutation,
+    useDeleteMovieMutation,
+    useGetSpecificMovieQuery,
+    useUploadImageMutation,
+    useGetNewMoviesQuery,
+    useGetTopMoviesQuery,
+    useGetRandomMoviesQuery
+} = moviesApiSlice
