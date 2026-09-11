@@ -45,10 +45,60 @@ export const CreateMovie = () => {
                 <p className="text-green-200 w-200 text-2xl font-bold mb-4">Create a Movie</p>
 
                 <div className="mb-4">
-                    <label className="block" htmlFor="movie name">
+                    <label className="block" htmlFor="movie-name">
                         Name:
+                        <input 
+                            type="text" 
+                            name='name' 
+                            value={movieData.name} 
+                            // onChange={(e) => setMovieData({...movieData, name: e.target.value})}
+                            // onChange={handleChange}
+                            className='border px-2 py-1 w-full'
+                        />
                     </label>
                 </div>
+
+                <div className="mb-4">
+                    <label className="block" htmlFor="movie-year">
+                        Year:
+                        <input 
+                            type="number" 
+                            name='year' 
+                            value={movieData.year} 
+                            // onChange={(e) => setMovieData({...movieData, name: e.target.value})}
+                            // onChange={handleChange}
+                            className='border px-2 py-1 w-full'
+                        />
+                    </label>
+                </div>
+
+                <div className="mb-4">
+                    <label className="block" htmlFor="movie-details">
+                        Details:
+                        <textarea 
+                            name="details" 
+                            id="details" 
+                            value={movieData.detail}
+                            // onChange={handleChange}
+                            className="border px-2 py-1 w-full"
+                        >
+                        </textarea>
+                    </label>
+                </div>
+
+                <div className="mb-4">
+                    <label className="block" htmlFor="movie-cast">
+                        Cast (comma-separated):
+                        <input 
+                            type="text" 
+                            name='cast' 
+                            value={movieData.cast.join(', ')} 
+                            onChange={(e) => setMovieData({...movieData, cast: e.target.value.split(', ')})}
+                            className='border px-2 py-1 w-full'
+                        />
+                    </label>
+                </div>
+
             </form>
         </div>
     )
