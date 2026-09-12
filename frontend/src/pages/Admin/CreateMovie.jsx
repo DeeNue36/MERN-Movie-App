@@ -44,6 +44,7 @@ export const CreateMovie = () => {
             <form>
                 <p className="text-green-200 w-200 text-2xl font-bold mb-4">Create a Movie</p>
 
+                {/* Movie Name */}
                 <div className="mb-4">
                     <label className="block" htmlFor="movie-name">
                         Name:
@@ -58,6 +59,7 @@ export const CreateMovie = () => {
                     </label>
                 </div>
 
+                {/* Movie Year */}
                 <div className="mb-4">
                     <label className="block" htmlFor="movie-year">
                         Year:
@@ -72,6 +74,7 @@ export const CreateMovie = () => {
                     </label>
                 </div>
 
+                {/* Movie Details */}
                 <div className="mb-4">
                     <label className="block" htmlFor="movie-details">
                         Details:
@@ -86,6 +89,7 @@ export const CreateMovie = () => {
                     </label>
                 </div>
 
+                {/* Movie Cast */}
                 <div className="mb-4">
                     <label className="block" htmlFor="movie-cast">
                         Cast (comma-separated):
@@ -98,6 +102,55 @@ export const CreateMovie = () => {
                         />
                     </label>
                 </div>
+
+                {/* Movie Genre */}
+                <div className="mb-4">
+                    <label className="block" htmlFor="movie-genre">
+                        Genre:
+                        <select 
+                            name="genre" 
+                            id="genre" 
+                            value={movieData.genre} 
+                            // onChange={handleChange}
+                            className="border px-2 py-1 w-full"
+                        >
+                            {isLoadingGenres ? (
+                                <option>Loading Genres...</option>
+                            ) : (
+                                genres.map((genre) => (
+                                    <option key={genre._id} value={genre._id}>
+                                        {genre.name}
+                                    </option>
+                                ))
+                            )}
+                        </select>
+                    </label>
+                </div>
+
+                {/* Movie Image */}
+                <div className="mb-4">
+                    <label 
+                        style={!selectedImage ? {border: '1px solid #888', borderRadius: '5px', padding: '8px'} : {border: '0', borderRadius: '0', padding: '0'}} 
+                        htmlFor="movie-image"
+                    >
+                        {!selectedImage && "Upload Image"}
+                        <input 
+                            type="file" 
+                            accept="image/*"
+                            // onChange={handleImageChange}
+                            style={{display: !selectedImage ? 'none' : 'block'}}
+                        />
+                    </label>
+                </div>
+
+                <button 
+                    type="button" 
+                    // onClick={handleCreateMovie} 
+                    className="bg-teal-500 text-white py-2 px-4 rounded"
+                    disabled={isCreatingMovie || isUploadingImage}
+                >
+                    {isCreatingMovie || isUploadingImage ? 'Creating...' : 'Create Movie'}
+                </button>
 
             </form>
         </div>
