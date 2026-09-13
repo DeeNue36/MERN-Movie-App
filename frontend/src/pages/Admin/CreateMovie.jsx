@@ -38,6 +38,26 @@ export const CreateMovie = () => {
 
     }, [genres]);
 
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+
+        if (name === 'genre') {
+            const selectedGenre = genres.find(genre => genre.name === value);
+
+            setMovieData(prevData => ({
+                ...prevData,
+                genre: selectedGenre ? selectedGenre._id : ''
+            }));
+            
+        } 
+        else {
+            setMovieData(prevData => ({
+                ...prevData,
+                [name]: value
+            }));
+        }
+    }
+
 
     return (
         <div className= 'container flex justify-center items-center mt-4'>
@@ -53,7 +73,7 @@ export const CreateMovie = () => {
                             name='name' 
                             value={movieData.name} 
                             // onChange={(e) => setMovieData({...movieData, name: e.target.value})}
-                            // onChange={handleChange}
+                            onChange={handleChange}
                             className='border px-2 py-1 w-full'
                         />
                     </label>
@@ -68,7 +88,7 @@ export const CreateMovie = () => {
                             name='year' 
                             value={movieData.year} 
                             // onChange={(e) => setMovieData({...movieData, name: e.target.value})}
-                            // onChange={handleChange}
+                            onChange={handleChange}
                             className='border px-2 py-1 w-full'
                         />
                     </label>
@@ -82,7 +102,7 @@ export const CreateMovie = () => {
                             name="details" 
                             id="details" 
                             value={movieData.detail}
-                            // onChange={handleChange}
+                            onChange={handleChange}
                             className="border px-2 py-1 w-full"
                         >
                         </textarea>
