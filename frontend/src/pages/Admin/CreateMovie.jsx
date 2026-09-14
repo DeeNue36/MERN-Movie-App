@@ -58,6 +58,62 @@ export const CreateMovie = () => {
         }
     }
 
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        setSelectedImage(file);
+    }
+
+    const handleCreateMovie = async() => {
+        try {
+            if (!movieData.name || !movieData.year || !movieData.detail || !movieData.cast || !selectedImage) {
+                toast.error('Please fill all the required fields');
+                return;
+            }
+
+            let uploadedImagePath = null;
+
+            if (selectedImage) {
+                const formData = new FormData();
+                formData.append('image', selectedImage);
+
+                const uploadImageResponse = await uploadImage(formData);
+                if (uploadImageResponse.data) {
+                    uploadedImagePath = uploadImageResponse.data.image;
+                }
+                else {
+                    console.error('Failed to upload image:', uploadImageError);
+                    toast.error('Failed to upload image');
+                    return;
+                }
+
+                await createMovie({
+                    ...movieData,
+                    image: uploadedImagePath
+                });
+
+                navigate('/admin/movies-list')
+
+                // Optional – Reset the form
+                setMovieData({
+                    name: '',
+                    year: '',
+                    detail: '',
+                    cast: [],
+                    rating: 0,
+                    image: null,
+                    genre: ''
+                });
+                // setSelectedImage(null);
+
+                toast.success('Movie created successfully');
+            }
+
+        } catch (error) {
+            console.log('Failed to create movie: ', createMovieError);
+            toast.error(`Failed to create movie: ${createMovieError?.message || error.message || 'Something went wrong'}`);
+        }
+    }
+
 
     return (
         <div className= 'container flex justify-center items-center mt-4'>
@@ -131,14 +187,14 @@ export const CreateMovie = () => {
                             name="genre" 
                             id="genre" 
                             value={movieData.genre} 
-                            // onChange={handleChange}
+                            onChange={handleChange}
                             className="border px-2 py-1 w-full"
                         >
                             {isLoadingGenres ? (
                                 <option>Loading Genres...</option>
                             ) : (
                                 genres.map((genre) => (
-                                    <option key={genre._id} value={genre._id}>
+                                    <option key={genre.id} value={genre.id}>
                                         {genre.name}
                                     </option>
                                 ))
@@ -157,7 +213,7 @@ export const CreateMovie = () => {
                         <input 
                             type="file" 
                             accept="image/*"
-                            // onChange={handleImageChange}
+                            onChange={handleImageChange}
                             style={{display: !selectedImage ? 'none' : 'block'}}
                         />
                     </label>
@@ -165,7 +221,7 @@ export const CreateMovie = () => {
 
                 <button 
                     type="button" 
-                    // onClick={handleCreateMovie} 
+                    onClick={handleCreateMovie} 
                     className="bg-teal-500 text-white py-2 px-4 rounded"
                     disabled={isCreatingMovie || isUploadingImage}
                 >
