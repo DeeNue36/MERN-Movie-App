@@ -19,7 +19,7 @@ import { createBrowserRouter } from 'react-router-dom'
 // Auth
 import { AdminRoute } from './pages/Admin/AdminRoute.jsx'
 import { GenreList } from './pages/Admin/GenreList.jsx'
-import { CreateMovie } from './pages/Admin/CreateMovie';
+import { CreateMovie } from './pages/Admin/CreateMovie.jsx'
 
 
 
@@ -54,5 +54,5 @@ createRoot(document.getElementById('root')).render(
     <Provider store={store}>
       <RouterProvider router={router} />
     </Provider>
-  </StrictMode>,
+  </StrictMode>
 )
