@@ -15,22 +15,23 @@ const storage = multer.diskStorage({
     }
 })
 
-const filterFiles = (req, file, callback) => {
-    const filetypes = /jpe?g|png|webp/;
-    const mimetypes = /image\/jpe?g|image\/png||image\/webp/;
+const fileFilter = (req, file, callback) => {
+    const filetypes = /jpeg|jpg|png|webp/;
+    const allowedMimeTypes = /^image\/(jpeg|png|webp)$/;
 
-    const extname = path.extname(file.originalname);
-    const mimetype = file.mimetype;
+    const extname = path.extname(file.originalname).toLowerCase().replace('.', '');
+    const isValidExtension = filetypes.test(extname);
+    const isValidMimeType = allowedMimeTypes.test(file.mimetype);
 
-    if(filetypes.test(extname) && mimetypes.test(mimetype)) {
+    if(isValidExtension && isValidMimeType) {
         callback(null, true);
     } 
     else {
-        callback(new Error('Images only!'), false);
+        callback(new Error('Images only: jpeg, jpg, png, or webp'), false);
     }
 }
 
-const upload = multer({storage, filterFiles})
+const upload = multer({storage, fileFilter});
 const singleImageUpload = upload.single('image');
 
 router.post('/', (req, res) => {
