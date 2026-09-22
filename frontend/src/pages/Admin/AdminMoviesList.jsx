@@ -18,8 +18,32 @@ export const AdminMoviesList = () => {
                         {movies?.map((movie) => (
                             <Link key={movie._id} to={`/admin/movies/update/${movie._id}`} className='block mb-4 overflow-hidden'>
                                 <div className="flex">
-                                    <div key={movie._id} classNme='max-w-sm m-8 rounded overflow-hidden shadow-lg'>
-                                        <img src={movie.image} alt={movie.name} />
+                                    <div key={movie._id} className='max-w-sm m-8 rounded overflow-hidden shadow-lg'>
+                                        <img src={movie.image} alt={movie.name} className="w-full h-48 object-cover" />
+
+                                        <div className='px-6 py-4 border border-gray-400'>
+                                            <div className="font-bold text-xl mb-2">
+                                                {movie.name}
+                                            </div>
+                                        </div>
+
+                                        <p className='text-gray-700 text-base'>
+                                            {movie.description}
+                                        </p>
+
+                                        <div className="mt-8 mb-4">
+                                            <button 
+                                                type="button" 
+                                                onClick={() => {`/admin/movies/update/${movie._id}`}}
+                                                className='bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded'
+                                            >
+                                                Update Movie
+                                            </button>
+                                            {/* <Link to={`/admin/movies/update/${movie._id}`} className='bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded'>
+                                                Update Movie
+                                            </Link> */} 
+                                        </div>
+
                                     </div>
                                 </div>
                             </Link>
