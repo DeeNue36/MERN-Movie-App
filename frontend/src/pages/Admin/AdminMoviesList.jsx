@@ -41,7 +41,7 @@ export const AdminMoviesList = () => {
                                             </button>
                                             {/* <Link to={`/admin/movies/update/${movie._id}`} className='bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded'>
                                                 Update Movie
-                                            </Link> */} 
+                                            </Link> --- causes hydration error*/} 
                                         </div>
 
                                     </div>
