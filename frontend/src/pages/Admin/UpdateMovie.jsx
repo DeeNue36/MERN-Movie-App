@@ -9,6 +9,20 @@ import {
 import { toast } from 'react-toastify';
 
 export const UpdateMovie = () => {
+
+    const { id } = useParams();
+    const navigate = useNavigate();
+
+    const [movieData, setMovieData] = useState({
+        name: '',
+        year: 0,
+        detail: '',
+        cast: [],
+        rating: 0,
+        image: null,
+        // genre: '',
+    });
+
     return (
         <div>UpdateMovie</div>
     )
