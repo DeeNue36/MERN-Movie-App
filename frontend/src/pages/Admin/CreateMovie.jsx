@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import { useCreateMovieMutation, useUploadImageMutation } from '../../redux/api/movies'
+import { useCreateMovieMutation, useUploadImageMutation } from '../../redux/api/movies';
 import { useFetchGenresQuery } from '../../redux/api/genre'
 import { toast } from 'react-toastify';
 
