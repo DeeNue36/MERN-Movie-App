@@ -9,7 +9,6 @@ import {
 import { toast } from 'react-toastify';
 
 export const UpdateMovie = () => {
-
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -22,6 +21,9 @@ export const UpdateMovie = () => {
         image: null,
         // genre: '',
     });
+
+    const [selectedImage, setSelectedImage] = useState(null);
+    const {data: initialMovieData } = useGetSpecificMovieQuery(id);
 
     return (
         <div>UpdateMovie</div>
