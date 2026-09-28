@@ -12,7 +12,7 @@ export const UpdateMovie = () => {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const [movieData, setMovieData] = useState({
+    const [ movieData, setMovieData ] = useState({
         name: '',
         year: 0,
         detail: '',
@@ -22,8 +22,10 @@ export const UpdateMovie = () => {
         // genre: '',
     });
 
-    const [selectedImage, setSelectedImage] = useState(null);
-    const {data: initialMovieData } = useGetSpecificMovieQuery(id);
+    const [ selectedImage, setSelectedImage ] = useState(null);
+    const { data: initialMovieData } = useGetSpecificMovieQuery(id);
+    const [ updateMovie, { isLoading: isUpdatingMovie } ] = useUpdateMovieMutation();
+    const [ uploadImage, { isLoading: isUploadingImage, error: uploadImageError } ] = useUploadImageMutation();
 
     return (
         <div>UpdateMovie</div>
