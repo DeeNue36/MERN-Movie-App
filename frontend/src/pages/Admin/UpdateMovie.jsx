@@ -26,8 +26,16 @@ export const UpdateMovie = () => {
     const { data: initialMovieData } = useGetSpecificMovieQuery(id);
     const [ updateMovie, { isLoading: isUpdatingMovie } ] = useUpdateMovieMutation();
     const [ uploadImage, { isLoading: isUploadingImage, error: uploadImageError } ] = useUploadImageMutation();
+    const [ deleteMovie ] = useDeleteMovieMutation();
 
     return (
-        <div>UpdateMovie</div>
+        <div className='container flex justify-center items-center mt-4'>
+            <form>
+                <p className='text-green-200 w-200 text-2xl mb-4'>
+                    Update Movie
+                </p>
+            </form>
+
+        </div>
     )
 }
